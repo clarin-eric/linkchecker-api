@@ -1,1 +1,10 @@
-
+spring:
+   datasource:
+      url: jdbc:mariadb://127.0.0.1:3306/linkcheckerTest
+      username: testUser
+      password: testPassword
+      driver-class-name: org.mariadb.jdbc.Driver
+   jpa:
+      show-sql: true
+      hibernate:
+         ddl-auto: none
