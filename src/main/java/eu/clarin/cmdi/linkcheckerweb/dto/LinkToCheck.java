@@ -3,11 +3,14 @@
  */
 package eu.clarin.cmdi.linkcheckerweb.dto;
 
+import lombok.Data;
+
 /**
  * @author WolfgangWalter Sauer (wowasa)
  *
  */
-public class LTC {
+@Data
+public class LinkToCheck {
    
    String url;
    

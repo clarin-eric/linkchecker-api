@@ -3,6 +3,7 @@
  */
 package eu.clarin.cmdi.linkcheckerweb.dto;
 
+import eu.clarin.cmdi.cpa.model.Role;
 import lombok.Data;
 
 /**
@@ -10,14 +11,18 @@ import lombok.Data;
  *
  */
 @Data
-public class ClientDto {
+public class UserDto {
    
    private Long id;
    
+   private String username;
+   
+   private String password;
+   
    private String email;
    
-   private String token;
-   
    private Long quota;
+   
+   private Role role;
 
 }

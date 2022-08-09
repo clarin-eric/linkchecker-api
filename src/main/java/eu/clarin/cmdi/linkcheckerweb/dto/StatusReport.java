@@ -3,6 +3,7 @@
  */
 package eu.clarin.cmdi.linkcheckerweb.dto;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 import lombok.Data;
@@ -12,12 +13,12 @@ import lombok.Data;
  *
  */
 @Data
-public class Lot {
+public class StatusReport {
    
-   private String email;
+   private LocalDateTime creationDate;
    
-   private String token;
+   private Long numberOfLinks;
    
-   private Collection<LTC> ltcs;
+   Collection<CheckedLink> checkedLinks;
 
 }
