@@ -43,13 +43,14 @@ public class UserCtl {
    @ResponseStatus(code = HttpStatus.CREATED)
    public UserDto createUser(@RequestBody UserDto userDto) {
       
-      userDto.setPassword(pwEncoder.encode(UUID.randomUUID().toString()));
+      userDto.setPassword(UUID.randomUUID().toString());
       userDto.setRole(Role.USER);
       
       User user = new User(userDto.getUsername(), pwEncoder.encode(userDto.getPassword()), userDto.getRole());
       user.setQuota(userDto.getQuota());
       
-      usRep.save(user);     
+      usRep.save(user);    
+      userDto.setId(user.getId());
 
       return userDto;
    }
