@@ -66,7 +66,7 @@ public class LcWebSecurityConfig {
          @Override
          public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
             return usRep
-                  .findByUsername(username)
+                  .findByName(username)
                   .map(user -> new UserDetails(){
 
                      private static final long serialVersionUID = 1L;
@@ -76,7 +76,7 @@ public class LcWebSecurityConfig {
                      @Override
                      public String getPassword() { return user.getPassword(); }
                      @Override
-                     public String getUsername() { return user.getUsername(); }
+                     public String getUsername() { return user.getName(); }
                      @Override
                      public boolean isAccountNonExpired() { return true; }
                      @Override

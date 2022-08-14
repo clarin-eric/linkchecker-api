@@ -34,7 +34,7 @@ public class LcAdminRegistration {
    @PostConstruct
    public void createAdmin() {
       
-      usRep.findByUsername(props.getAdminUsername()).orElseGet(() -> {
+      usRep.findByName(props.getAdminUsername()).orElseGet(() -> {
          return usRep.save(new User(props.getAdminUsername(), pwEncoder.encode(props.getAdminPassword()), Role.ADMIN));
       });     
    }

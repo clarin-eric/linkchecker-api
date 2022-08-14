@@ -77,7 +77,7 @@ public class UserCtl {
         return StreamSupport.stream(usRep.findAll().spliterator(), false).map(user -> {
            UserDto userDto = new UserDto();
            userDto.setId(user.getId());
-           userDto.setUsername(user.getUsername());
+           userDto.setUsername(user.getName());
            userDto.setPassword("####");
            userDto.setEmail(user.getEmail());
            userDto.setQuota(user.getQuota());

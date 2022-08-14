@@ -3,6 +3,9 @@
  */
 package eu.clarin.cmdi.linkcheckerweb.dto;
 
+import java.time.LocalDateTime;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
@@ -10,11 +13,10 @@ import lombok.Data;
  *
  */
 @Data
+@AllArgsConstructor
 public class CheckedLink {
    
    private String url;
-   
-   private String batchId;
    
    private String method;
    
@@ -25,6 +27,8 @@ public class CheckedLink {
    private Long contentLength;
    
    private Integer duration;
+   
+   private LocalDateTime checkingDate;
    
    private String message;
    

@@ -17,8 +17,6 @@ public class StatusReport {
    
    private LocalDateTime creationDate;
    
-   private Long numberOfLinks;
-   
    Collection<CheckedLink> checkedLinks;
 
 }
