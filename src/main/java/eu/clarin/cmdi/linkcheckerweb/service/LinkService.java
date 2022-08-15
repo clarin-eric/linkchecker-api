@@ -14,17 +14,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import eu.clarin.cmdi.cpa.model.Context;
-import eu.clarin.cmdi.cpa.model.Obsolete;
 import eu.clarin.cmdi.cpa.model.Status;
 import eu.clarin.cmdi.cpa.model.Url;
 import eu.clarin.cmdi.cpa.model.UrlContext;
-import eu.clarin.cmdi.cpa.model.User;
+import eu.clarin.cmdi.cpa.model.Client;
 import eu.clarin.cmdi.cpa.repository.ContextRepository;
-import eu.clarin.cmdi.cpa.repository.ObsoleteRepository;
 import eu.clarin.cmdi.cpa.repository.StatusRepository;
 import eu.clarin.cmdi.cpa.repository.UrlContextRepository;
 import eu.clarin.cmdi.cpa.repository.UrlRepository;
-import eu.clarin.cmdi.cpa.repository.UserRepository;
+import eu.clarin.cmdi.cpa.repository.ClientRepository;
 import eu.clarin.cmdi.cpa.service.StatusService;
 import eu.clarin.cmdi.cpa.utils.Category;
 import eu.clarin.cmdi.cpa.utils.UrlValidator;
@@ -37,7 +35,7 @@ import eu.clarin.cmdi.linkcheckerweb.exception.BatchToLargeException;
  *
  */
 @Service
-public class RepositoryService {
+public class LinkService {
    
    @Autowired
    private UrlRepository uRep;
@@ -50,25 +48,24 @@ public class RepositoryService {
    @Autowired
    private StatusRepository sRep;
    @Autowired
-   private UserRepository usRep;
-   @Autowired
-   private ObsoleteRepository oRep;
+   private ClientRepository usRep;
+
 
    
    @Transactional
    public String saveLTCs(String username,  Collection<LinkToCheck> ltcs) throws BatchToLargeException{
       
-      User user = usRep.findByName(username).get();
+      Client client = usRep.findByName(username).get();
       
       //check if the array size exceeds the quota
-      if(user.getQuota() != null) {
-         if(ltcs.size() < user.getQuota()) {
+      if(client.getQuota() != null) {
+         if(ltcs.size() < client.getQuota()) {
 
-            user.setQuota(user.getQuota() - ltcs.size());
-            usRep.save(user);
+            client.setQuota(client.getQuota() - ltcs.size());
+            usRep.save(client);
          }
          else {
-            throw new BatchToLargeException("the batch size is " + ltcs.size() + " but your remaining upload limit is " + user.getQuota());
+            throw new BatchToLargeException("the batch size is " + ltcs.size() + " but your remaining upload limit is " + client.getQuota());
          }
       }
       
@@ -104,49 +101,18 @@ public class RepositoryService {
                   return newUrl;
                });
          
-         Context context = cRep.findByOriginAndProvidergroupAndExpectedMimeTypeAndUser(origin, null, ltc.getExpectedMimeType(), user)
-               .orElseGet(() -> cRep.save(new Context(origin, null, ltc.getExpectedMimeType(), user)));                
+         Context context = cRep.findByOriginAndProvidergroupAndClient(origin, null, client)
+               .orElseGet(() -> cRep.save(new Context(origin, null, client)));                
             
-         ucRep.save(new UrlContext(url, context, now, true));             
+         
+         UrlContext urlContext = new UrlContext(url, context, now, true);
+         urlContext.setExpectedMimeType(ltc.getExpectedMimeType());
+         
+         ucRep.save(urlContext);   
+         
 
       });  
       
       return origin;
    }
-   
-   public Stream<Status> findAllStatus(String username, String batchId){
-        
-      
-      return (batchId!=null?sRep.findAllByUrlUrlContextsContextUserName(username)
-            :sRep.findAllByUrlUrlContextsContextUserNameAndUrlUrlContextsContextOrigin(username, batchId));
-   }
-   
-   @Transactional
-   public void deleteUrl(String username, Long urlId) {
-      
-      uRep.findById(urlId).ifPresent(url -> {
-         
-         url.getUrlContexts().stream().filter(urlContext -> urlContext.getContext().getUser().getName().equals(username))
-            .findFirst()
-            .ifPresent(urlContext -> {
-               if(url.getStatus() != null) { //first save status info
-                  
-                  Obsolete obsolete = new Obsolete(
-                        url.getName(),
-                        url.getStatus().getCategory(),
-                        url.getStatus().getMessage(),
-                        url.getStatus().getCheckingDate()
-                     );
-                  
-                  oRep.save(obsolete);
-                  
-               }
-            });
-      });
-      
-      
-      
-
-      
-   }
-}
+ }

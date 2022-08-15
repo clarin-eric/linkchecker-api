@@ -26,7 +26,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import eu.clarin.cmdi.cpa.model.Role;
-import eu.clarin.cmdi.cpa.repository.UserRepository;
+import eu.clarin.cmdi.cpa.repository.ClientRepository;
 
 
 /**
@@ -38,7 +38,7 @@ import eu.clarin.cmdi.cpa.repository.UserRepository;
 public class LcWebSecurityConfig {
    
    @Autowired
-   private UserRepository usRep;
+   private ClientRepository clRep;
 
    @Bean
    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -65,7 +65,7 @@ public class LcWebSecurityConfig {
 
          @Override
          public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-            return usRep
+            return clRep
                   .findByName(username)
                   .map(user -> new UserDetails(){
 

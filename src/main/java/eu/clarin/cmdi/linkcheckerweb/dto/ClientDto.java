@@ -11,7 +11,7 @@ import lombok.Data;
  *
  */
 @Data
-public class UserDto {
+public class ClientDto {
    
    private Long id;
    
@@ -20,6 +20,8 @@ public class UserDto {
    private String password;
    
    private String email;
+   
+   private Boolean enabled;
    
    private Long quota;
    

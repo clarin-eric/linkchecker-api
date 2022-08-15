@@ -11,8 +11,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import eu.clarin.cmdi.cpa.model.Role;
-import eu.clarin.cmdi.cpa.model.User;
-import eu.clarin.cmdi.cpa.repository.UserRepository;
+import eu.clarin.cmdi.cpa.model.Client;
+import eu.clarin.cmdi.cpa.repository.ClientRepository;
 
 /**
  * @author WolfgangWalter Sauer (wowasa)
@@ -25,7 +25,7 @@ public class LcAdminRegistration {
    @Autowired
    private LcWebProperties props;
    @Autowired
-   private UserRepository usRep;
+   private ClientRepository usRep;
    @Autowired
    private PasswordEncoder pwEncoder;
 
@@ -35,7 +35,10 @@ public class LcAdminRegistration {
    public void createAdmin() {
       
       usRep.findByName(props.getAdminUsername()).orElseGet(() -> {
-         return usRep.save(new User(props.getAdminUsername(), pwEncoder.encode(props.getAdminPassword()), Role.ADMIN));
+         Client client = new Client(props.getAdminUsername(), pwEncoder.encode(props.getAdminPassword()), Role.ADMIN);
+         client.setEnabled(true);
+         
+         return usRep.save(client);
       });     
    }
 }
