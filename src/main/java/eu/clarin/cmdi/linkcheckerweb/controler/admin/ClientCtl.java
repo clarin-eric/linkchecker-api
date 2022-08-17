@@ -56,7 +56,7 @@ public class ClientCtl {
         return StreamSupport.stream(clRep.findAll().spliterator(), false).map(client -> {
            ClientDto clientDto = new ClientDto();
            clientDto.setId(client.getId());
-           clientDto.setUsername(client.getName());
+           clientDto.setName(client.getName());
            clientDto.setPassword("*****");
            clientDto.setEmail(client.getEmail());
            clientDto.setEnabled(client.getEnabled());

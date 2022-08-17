@@ -6,7 +6,6 @@ package eu.clarin.cmdi.linkcheckerweb.service;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
-import java.util.stream.Stream;
 
 import javax.transaction.Transactional;
 
@@ -23,7 +22,6 @@ import eu.clarin.cmdi.cpa.repository.StatusRepository;
 import eu.clarin.cmdi.cpa.repository.UrlContextRepository;
 import eu.clarin.cmdi.cpa.repository.UrlRepository;
 import eu.clarin.cmdi.cpa.repository.ClientRepository;
-import eu.clarin.cmdi.cpa.service.StatusService;
 import eu.clarin.cmdi.cpa.utils.Category;
 import eu.clarin.cmdi.cpa.utils.UrlValidator;
 import eu.clarin.cmdi.cpa.utils.UrlValidator.ValidationResult;
@@ -43,8 +41,6 @@ public class LinkService {
    private UrlContextRepository ucRep;
    @Autowired
    private ContextRepository cRep;
-   @Autowired
-   private StatusService sService;
    @Autowired
    private StatusRepository sRep;
    @Autowired
@@ -91,12 +87,12 @@ public class LinkService {
             
                   ValidationResult validation = UrlValidator.validate(urlName);
                   
-                  Url newUrl = new Url(urlName, validation.getHost(), validation.isValid());
+                  Url newUrl = uRep.save(new Url(urlName, validation.getHost(), validation.isValid()));
                   
-                  if(!validation.isValid()) { //create a status entry if Url is not valid
+                  if(!validation.isValid() && sRep.findByUrl(newUrl).isEmpty()) { //create a status entry if Url is not valid
                      Status status = new Status(newUrl, Category.Invalid_URL, validation.getMessage(), LocalDateTime.now());
                      
-                     sService.save(status);
+                     sRep.save(status);
                   }
                   return newUrl;
                });

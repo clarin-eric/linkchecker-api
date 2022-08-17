@@ -5,14 +5,15 @@ package eu.clarin.cmdi.linkcheckerweb.controler.checkrequest;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.Optional;
 import java.util.stream.Stream;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,7 +36,7 @@ import eu.clarin.cmdi.linkcheckerweb.dto.LinkToCheck;
  */
 @Slf4j
 @RestController
-@RequestMapping(path = "/checkrequest", consumes = MediaType.APPLICATION_JSON_VALUE, produces =  MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "/")
 public class CheckRequestCtl {
    
    @Autowired
@@ -43,14 +44,15 @@ public class CheckRequestCtl {
    @Autowired
    LinkService lService;
    
-   @GetMapping(value = "/{batch-id}")
-   public ResponseEntity<StatusReport> getResults(Authentication auth, @PathVariable(required = false) String batchId) {
+   @Transactional
+   @GetMapping(value = {"/checkrequest", "/checkrequest/{batchId}"})
+   public ResponseEntity<StatusReport> getResults(Authentication auth, @PathVariable Optional<String> batchId) {
       
       final StatusReport report = new StatusReport();
       report.setCreationDate(LocalDateTime.now());
       
-      try(Stream<Status> stream = (batchId!=null?sRep.findAllByUrlUrlContextsContextClientName(auth.getName())
-            :sRep.findAllByUrlUrlContextsContextClientNameAndUrlUrlContextsContextOrigin(auth.getName(), batchId))){
+      try(Stream<Status> stream = (batchId.isEmpty()?sRep.findAllByUrlUrlContextsContextClientName(auth.getName())
+            :sRep.findAllByUrlUrlContextsContextClientNameAndUrlUrlContextsContextOrigin(auth.getName(), batchId.get()))){
          
          stream.forEach(status -> report.getCheckedLinks().add(
                new CheckedLink(
@@ -75,7 +77,7 @@ public class CheckRequestCtl {
       return ResponseEntity.ok(report);
    }
    
-   @PostMapping
+   @PostMapping("/checkrequest")
    public ResponseEntity<String> upload(Authentication auth, @RequestBody Collection<LinkToCheck> ltcs) {
       
       String message; 

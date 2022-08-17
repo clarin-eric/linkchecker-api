@@ -31,7 +31,7 @@ public class ClientService {
       clientDto.setPassword(UUID.randomUUID().toString());
       clientDto.setRole(Role.USER);
       
-      Client client = new Client(clientDto.getUsername(), pwEncoder.encode(clientDto.getPassword()), clientDto.getRole());
+      Client client = new Client(clientDto.getName(), pwEncoder.encode(clientDto.getPassword()), clientDto.getRole());
       client.setQuota(clientDto.getQuota());
       client.setEnabled(true);
       
@@ -45,6 +45,13 @@ public class ClientService {
    public ClientDto updateClient(ClientDto clientDto, boolean newPassword) {
       
       return clRep.findById(clientDto.getId()).map(client -> {
+         
+         if(clientDto.getName() != null) {
+            client.setName(clientDto.getName());
+         }
+         else {
+            clientDto.setName(client.getName());
+         }
          
          if(clientDto.getEmail() != null) {
             client.setEmail(clientDto.getEmail());

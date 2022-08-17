@@ -4,7 +4,10 @@
 package eu.clarin.cmdi.linkcheckerweb.dto;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
 
@@ -17,6 +20,7 @@ public class StatusReport {
    
    private LocalDateTime creationDate;
    
-   Collection<CheckedLink> checkedLinks;
+   @JsonProperty("checked-links")
+   Collection<CheckedLink> checkedLinks = new ArrayList<CheckedLink>();
 
 }
