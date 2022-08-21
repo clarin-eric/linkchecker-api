@@ -6,7 +6,7 @@ package eu.clarin.cmdi.linkcheckerweb.conf;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -19,11 +19,12 @@ import eu.clarin.cmdi.cpa.repository.ClientRepository;
  *
  */
 @Configuration
-@EnableConfigurationProperties(LcWebProperties.class)
 public class LcAdminRegistration {
    
-   @Autowired
-   private LcWebProperties props;
+   @Value("${spring.security.user.name}")
+   private String username;
+   @Value("${spring.security.user.password}")
+   private String password;
    @Autowired
    private ClientRepository usRep;
    @Autowired
@@ -34,8 +35,8 @@ public class LcAdminRegistration {
    @PostConstruct
    public void createAdmin() {
       
-      usRep.findByName(props.getAdminUsername()).orElseGet(() -> {
-         Client client = new Client(props.getAdminUsername(), pwEncoder.encode(props.getAdminPassword()), Role.ADMIN);
+      usRep.findByName(username).orElseGet(() -> {
+         Client client = new Client(username, pwEncoder.encode(password), Role.ADMIN);
          client.setEnabled(true);
          
          return usRep.save(client);

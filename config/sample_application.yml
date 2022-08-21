@@ -10,8 +10,10 @@ spring:
          ddl-auto: none
    sql:
       init:
-         mode: always         
-linkckecker-web:
+         mode: always 
+   security:
+      user:
+         name: admin
+         password: admin
+server:
    address: "https://linkcheckerweb.clarin.eu"
-   admin-username: clarin
-   admin-password: 8432b7d8-3947-40ad-9814-ce6601caf17d
