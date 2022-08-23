@@ -9,11 +9,11 @@ spring:
       hibernate:
          ddl-auto: none
       database-platform: org.hibernate.dialect.MariaDBDialect
+   security:
+      user:
+         name: clarin
+         password: 8432b7d8-3947-40ad-9814-ce6601caf17d   
 logging:
    level:
       org.hibernate.SQL: DEBUG
-      org.hibernate.type.descriptor.sql.BasicBinder: TRACE
-linkckecker-web:
-   address: "https://linkcheckerweb.clarin.eu"
-   admin-username: clarin
-   admin-password: 8432b7d8-3947-40ad-9814-ce6601caf17d      
+      org.hibernate.type.descriptor.sql.BasicBinder: TRACE    

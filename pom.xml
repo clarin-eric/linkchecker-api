@@ -27,12 +27,7 @@
       <dependency>
          <groupId>org.springframework.boot</groupId>
          <artifactId>spring-boot-starter-security</artifactId>
-      </dependency>
-      <dependency>
-         <groupId>com.h2database</groupId>
-         <artifactId>h2</artifactId>
-         <scope>test</scope>
-      </dependency>
+      </dependency>   
       <dependency>
          <groupId>org.mariadb.jdbc</groupId>
          <artifactId>mariadb-java-client</artifactId>
@@ -64,16 +59,16 @@
          <scope>test</scope>
       </dependency>
    </dependencies>
-   <distributionManagement>
-      <snapshotRepository>
+   <repositories>
+      <repository>
          <id>CLARIN-Snapshot</id>
          <url>https://nexus.clarin.eu/content/repositories/clarin-snapshot/</url>
-      </snapshotRepository>
+      </repository>
       <repository>
          <id>CLARIN</id>
          <url>https://nexus.clarin.eu/content/repositories/Clarin/</url>
       </repository>
-   </distributionManagement> 
+   </repositories> 
    <build>
       <plugins>
          <plugin>
