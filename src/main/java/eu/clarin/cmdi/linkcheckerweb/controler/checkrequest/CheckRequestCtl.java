@@ -6,7 +6,6 @@ package eu.clarin.cmdi.linkcheckerweb.controler.checkrequest;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
-import java.util.Optional;
 import java.util.stream.Stream;
 
 import javax.transaction.Transactional;
@@ -62,14 +61,21 @@ public class CheckRequestCtl {
    private ClientRepository usRep;
    
    @Transactional
-   @GetMapping(value = {"/checkrequest", "/checkrequest/{batchId}"})
-   public ResponseEntity<StatusReport> getResults(Authentication auth, @PathVariable Optional<String> batchId) {
+   @GetMapping(value = "/checkrequest")
+   public ResponseEntity<StatusReport> getResults(Authentication auth){
+      
+      return getResults(auth, null);
+   }
+   
+   @Transactional
+   @GetMapping(value = "/checkrequest/{batchId}")
+   public ResponseEntity<StatusReport> getResults(Authentication auth, @PathVariable String batchId) {
       
       final StatusReport report = new StatusReport();
       report.setCreationDate(LocalDateTime.now());
       
-      try(Stream<Status> stream = (batchId.isEmpty()?sRep.findAllByUrlUrlContextsContextClientName(auth.getName())
-            :sRep.findAllByUrlUrlContextsContextClientNameAndUrlUrlContextsContextOrigin(auth.getName(), batchId.get()))){
+      try(Stream<Status> stream = (batchId==null?sRep.findAllByUrlUrlContextsContextClientName(auth.getName())
+            :sRep.findAllByUrlUrlContextsContextClientNameAndUrlUrlContextsContextOrigin(auth.getName(), batchId))){
          
          stream.forEach(status -> report.getCheckedLinks().add(
                new CheckedLink(
