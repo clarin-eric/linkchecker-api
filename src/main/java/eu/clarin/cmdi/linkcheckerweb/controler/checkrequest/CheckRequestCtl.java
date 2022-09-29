@@ -12,6 +12,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +37,7 @@ import eu.clarin.cmdi.cpa.utils.UrlValidator;
 import eu.clarin.cmdi.cpa.utils.UrlValidator.ValidationResult;
 import eu.clarin.cmdi.linkcheckerweb.dto.StatusReport;
 import eu.clarin.cmdi.linkcheckerweb.exception.BatchToLargeException;
+import io.swagger.v3.oas.annotations.info.Info;
 import lombok.extern.slf4j.Slf4j;
 import eu.clarin.cmdi.linkcheckerweb.dto.CheckedLink;
 import eu.clarin.cmdi.linkcheckerweb.dto.LinkToCheck;
@@ -61,14 +63,14 @@ public class CheckRequestCtl {
    private ClientRepository usRep;
    
    @Transactional
-   @GetMapping(value = "/checkrequest")
+   @GetMapping(value = "/checkrequest", produces = MediaType.APPLICATION_JSON_VALUE)
    public ResponseEntity<StatusReport> getResults(Authentication auth){
       
       return getResults(auth, null);
    }
    
    @Transactional
-   @GetMapping(value = "/checkrequest/{batchId}")
+   @GetMapping(value = "/checkrequest/{batchId}", produces = MediaType.APPLICATION_JSON_VALUE)
    public ResponseEntity<StatusReport> getResults(Authentication auth, @PathVariable String batchId) {
       
       final StatusReport report = new StatusReport();
@@ -100,7 +102,7 @@ public class CheckRequestCtl {
       return ResponseEntity.ok(report);
    }
    
-   @PostMapping("/checkrequest")
+   @PostMapping(value = "/checkrequest", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
    public ResponseEntity<String> upload(Authentication auth, @RequestBody Collection<LinkToCheck> ltcs) {
       
       String message; 
