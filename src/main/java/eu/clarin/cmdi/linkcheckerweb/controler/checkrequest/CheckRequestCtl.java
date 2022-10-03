@@ -64,7 +64,10 @@ public class CheckRequestCtl {
    
    @Transactional
    @GetMapping(value = "/checkrequest", produces = MediaType.APPLICATION_JSON_VALUE)
-   @Operation(summary = "receive list of checking results", description = "returns a list of all checking results for the logged-in in client")
+   @Operation(
+      summary = "receive list of checking results", 
+      description = "returns a list of all checking results for the logged-in in client"
+   )
    public ResponseEntity<StatusReport> getResults(Authentication auth){
       
       return getResults(auth, null);
@@ -72,7 +75,10 @@ public class CheckRequestCtl {
    
    @Transactional
    @GetMapping(value = "/checkrequest/{batchId}", produces = MediaType.APPLICATION_JSON_VALUE)
-   @Operation(summary = "receive list of checking results for specific upload", description = "returns a list of all checking results of a specific upload for the logged-in in client")
+   @Operation(
+      summary = "receive list of checking results for specific upload", 
+      description = "returns a list of all checking results of a specific upload for the logged-in in client"
+   )
    public ResponseEntity<StatusReport> getResults(Authentication auth, @PathVariable String batchId) {
       
       final StatusReport report = new StatusReport();
@@ -106,7 +112,10 @@ public class CheckRequestCtl {
    }
    
    @PostMapping(value = "/checkrequest", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-   @Operation(summary = "upload URLs to check", description = "upload an array of URLs to check")
+   @Operation(
+      summary = "upload URLs to check", 
+      description = "upload an array of URLs to check"
+   )
    public ResponseEntity<String> upload(Authentication auth, @RequestBody Collection<LinkToCheck> ltcs) {
       
       String message; 

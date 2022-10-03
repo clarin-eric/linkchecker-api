@@ -18,9 +18,9 @@ public class ClientDto {
    private Long id;
    @Schema(description = "unique client name", required = true, nullable = false, type = "string", example = "wowasa")
    private String name;
-   @Schema(description = "the password for the client - generated automatically at creation time", required = false, type = "String", example = "1234-5678")
+   @Schema(description = "the password for the client - generated automatically at creation time", required = false, type = "String", format = "password", example = "1234-5678")
    private String password;
-   @Schema(description = "client's email address - might be used for notifications later", required = false, type = "string", example = "devnull@wowasa.com")
+   @Schema(description = "client's email address - might be used for notifications later", required = false, type = "string", format = "email", example = "devnull@wowasa.com")
    private String email;
    @Schema(description = "enable/disable client access", required = false, type = "boolean", example = "true")
    private Boolean enabled;

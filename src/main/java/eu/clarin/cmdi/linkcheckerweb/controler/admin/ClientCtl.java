@@ -49,7 +49,10 @@ public class ClientCtl {
    }
 
    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-   @Operation(summary = "update client data", description = "update client data as name, email, etc - the field id is not updatetabale, a new password is generated with parameter updatepw=true")
+   @Operation(
+      summary = "update client data", 
+      description = "update client data as name, email, etc - the field id is not updatetabale, a new password is generated with parameter updatepw=true"
+   )
    public ClientDto updateClient(@RequestBody ClientDto userDto,
          @RequestParam(name = "updatepw", required = false, defaultValue = "false") Boolean updatePw) {
 
@@ -57,7 +60,10 @@ public class ClientCtl {
    }
 
    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-   @Operation(summary = "get a list of all clients", description = "get a list of all clients - no password's are shown")
+   @Operation(
+      summary = "get a list of all clients", 
+      description = "get a list of all clients - no password's are shown"
+   )
    public Stream<ClientDto> getAllClients() {
 
       return StreamSupport.stream(clRep.findAll().spliterator(), false).map(client -> {
@@ -130,6 +136,5 @@ public class ClientCtl {
 
          return clientDto;
       }).orElseThrow(() -> new ClientNotFoundException("client with id " + clientDto.getId() + " doesn't exist"));
-
    }
 }

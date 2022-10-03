@@ -19,7 +19,7 @@ import lombok.Data;
 @AllArgsConstructor
 public class CheckedLink {
    
-   @Schema(description = "checked URL", nullable = false, type = "string", example = "http://www.wowasa.com/page1")   
+   @Schema(description = "checked URL", nullable = false, type = "string", format = "uri", example = "http://www.wowasa.com/page1")   
    private String url;
    @Schema(description = "HEAD or GET request", nullable = false, type = "string", example = "GET")
    private String method;
@@ -34,7 +34,7 @@ public class CheckedLink {
    private Long contentLength;
    @Schema(description = "time in ms between request and response - in case of redirects only the time of the final request/response", nullable = true, type = "integer", example = "10")
    private Integer duration;
-   @Schema(description = "date/time of the the check", nullable = false, type = "date-time", example = "2022-10-02T19:00:20")
+   @Schema(description = "date/time of the the check", nullable = false, type = "string", format = "date-time", example = "2022-10-02T19:00:20")
    @JsonProperty("checking-date")
    private LocalDateTime checkingDate;
    @Schema(description = "message returned from server or generated message", nullable = false, type = "string", example = "Restricted access, Status code: 401")
