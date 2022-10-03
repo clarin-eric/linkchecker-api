@@ -25,12 +25,13 @@ import eu.clarin.cmdi.cpa.model.Role;
 import eu.clarin.cmdi.cpa.repository.ClientRepository;
 import eu.clarin.cmdi.linkcheckerweb.dto.ClientDto;
 import eu.clarin.cmdi.linkcheckerweb.exception.ClientNotFoundException;
+import io.swagger.v3.oas.annotations.Operation;
 
 /**
  * @author WolfgangWalter Sauer (wowasa)
  *
  */
-@RestController
+@RestController()
 @RequestMapping(path = "/admin/client")
 public class ClientCtl {
 
@@ -41,12 +42,14 @@ public class ClientCtl {
 
    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
    @ResponseStatus(code = HttpStatus.CREATED)
+   @Operation(summary = "create new client", description = "create new client with the specific data - the id- and the password-field are irgnored if set, since they are generated automatically")
    public ClientDto createClient(@RequestBody ClientDto clientDto) {
 
       return createNewClient(clientDto);
    }
 
    @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+   @Operation(summary = "update client data", description = "update client data as name, email, etc - the field id is not updatetabale, a new password is generated with parameter updatepw=true")
    public ClientDto updateClient(@RequestBody ClientDto userDto,
          @RequestParam(name = "updatepw", required = false, defaultValue = "false") Boolean updatePw) {
 
@@ -54,6 +57,7 @@ public class ClientCtl {
    }
 
    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+   @Operation(summary = "get a list of all clients", description = "get a list of all clients - no password's are shown")
    public Stream<ClientDto> getAllClients() {
 
       return StreamSupport.stream(clRep.findAll().spliterator(), false).map(client -> {

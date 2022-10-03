@@ -9,6 +9,7 @@ import java.util.Collection;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 /**
@@ -18,8 +19,10 @@ import lombok.Data;
 @Data
 public class StatusReport {
    
+   @Schema(description = "creation date/time of the report", nullable = false, type = "date-time", example = "2022-10-02T19:00:20")
    private LocalDateTime creationDate;
    
+   @Schema(description = "a list of link checking results", nullable = false, type = "array")
    @JsonProperty("checked-links")
    Collection<CheckedLink> checkedLinks = new ArrayList<CheckedLink>();
 

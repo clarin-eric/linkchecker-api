@@ -37,7 +37,7 @@ import eu.clarin.cmdi.cpa.utils.UrlValidator;
 import eu.clarin.cmdi.cpa.utils.UrlValidator.ValidationResult;
 import eu.clarin.cmdi.linkcheckerweb.dto.StatusReport;
 import eu.clarin.cmdi.linkcheckerweb.exception.BatchToLargeException;
-import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import eu.clarin.cmdi.linkcheckerweb.dto.CheckedLink;
 import eu.clarin.cmdi.linkcheckerweb.dto.LinkToCheck;
@@ -64,6 +64,7 @@ public class CheckRequestCtl {
    
    @Transactional
    @GetMapping(value = "/checkrequest", produces = MediaType.APPLICATION_JSON_VALUE)
+   @Operation(summary = "receive list of checking results", description = "returns a list of all checking results for the logged-in in client")
    public ResponseEntity<StatusReport> getResults(Authentication auth){
       
       return getResults(auth, null);
@@ -71,6 +72,7 @@ public class CheckRequestCtl {
    
    @Transactional
    @GetMapping(value = "/checkrequest/{batchId}", produces = MediaType.APPLICATION_JSON_VALUE)
+   @Operation(summary = "receive list of checking results for specific upload", description = "returns a list of all checking results of a specific upload for the logged-in in client")
    public ResponseEntity<StatusReport> getResults(Authentication auth, @PathVariable String batchId) {
       
       final StatusReport report = new StatusReport();
@@ -88,6 +90,7 @@ public class CheckRequestCtl {
                      status.getContentLength(),
                      status.getDuration(), 
                      status.getCheckingDate(),
+                     status.getCategory().name(),
                      status.getMessage()
                )
             ));
@@ -103,6 +106,7 @@ public class CheckRequestCtl {
    }
    
    @PostMapping(value = "/checkrequest", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+   @Operation(summary = "upload URLs to check", description = "upload an array of URLs to check")
    public ResponseEntity<String> upload(Authentication auth, @RequestBody Collection<LinkToCheck> ltcs) {
       
       String message; 
