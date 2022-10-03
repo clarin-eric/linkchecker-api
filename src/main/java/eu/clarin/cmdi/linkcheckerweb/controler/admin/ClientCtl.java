@@ -85,6 +85,7 @@ public class ClientCtl {
       clientDto.setRole(Role.USER);
 
       Client client = new Client(clientDto.getName(), pwEncoder.encode(clientDto.getPassword()), clientDto.getRole());
+      client.setEmail(clientDto.getEmail());
       client.setQuota(clientDto.getQuota());
       client.setEnabled(true);
 
@@ -130,6 +131,12 @@ public class ClientCtl {
          }
          else {
             clientDto.setEnabled(client.getEnabled());
+         }
+         if(clientDto.getRole() != null) {
+            client.setRole(clientDto.getRole());
+         }
+         else {
+            clientDto.setRole(client.getRole());
          }
 
          clRep.save(client);
