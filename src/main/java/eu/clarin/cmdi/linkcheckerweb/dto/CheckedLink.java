@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import eu.clarin.cmdi.cpa.utils.Category;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -37,9 +38,8 @@ public class CheckedLink {
    @Schema(description = "date/time of the the check", nullable = false, type = "string", format = "date-time", example = "2022-10-02T19:00:20")
    @JsonProperty("checking-date")
    private LocalDateTime checkingDate;
+   @Schema(description = "the category deppending on the status-code", nullable = false, type = "string", example = "Restricted_Access")
+   private Category category;
    @Schema(description = "message returned from server or generated message", nullable = false, type = "string", example = "Restricted access, Status code: 401")
    private String message;
-   @Schema(description = "the category deppending on the status-code", nullable = false, type = "string", example = "Restricted_Access")
-   private String category;
-   
 }

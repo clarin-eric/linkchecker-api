@@ -96,7 +96,7 @@ public class CheckRequestCtl {
                      status.getContentLength(),
                      status.getDuration(), 
                      status.getCheckingDate(),
-                     status.getCategory().name(),
+                     status.getCategory(),
                      status.getMessage()
                )
             ));
