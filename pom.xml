@@ -44,8 +44,8 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>eu.clarin.cmdi</groupId>
-			<artifactId>curation-persistence</artifactId>
+			<groupId>eu.clarin</groupId>
+			<artifactId>linkchecker-persistence</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>

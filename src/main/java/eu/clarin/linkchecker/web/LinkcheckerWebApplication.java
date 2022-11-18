@@ -1,4 +1,4 @@
-package eu.clarin.cmdi.linkcheckerweb;
+package eu.clarin.linkchecker.web;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

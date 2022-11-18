@@ -1,7 +1,7 @@
 /**
  * 
  */
-package eu.clarin.cmdi.linkcheckerweb.exception;
+package eu.clarin.linkchecker.web.exception;
 
 /**
  * @author WolfgangWalter Sauer (wowasa)

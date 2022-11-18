@@ -1,7 +1,7 @@
 /**
  * 
  */
-package eu.clarin.cmdi.linkcheckerweb.conf;
+package eu.clarin.linkchecker.web.conf;
 
 import javax.annotation.PostConstruct;
 
@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import eu.clarin.cmdi.cpa.model.Role;
-import eu.clarin.cmdi.cpa.model.Client;
-import eu.clarin.cmdi.cpa.repository.ClientRepository;
+import eu.clarin.linkchecker.persistence.model.Role;
+import eu.clarin.linkchecker.persistence.model.Client;
+import eu.clarin.linkchecker.persistence.repository.ClientRepository;
 
 /**
  * @author WolfgangWalter Sauer (wowasa)

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package eu.clarin.cmdi.linkcheckerweb.controler.admin;
+package eu.clarin.linkchecker.web.controler.admin;
 
 import java.util.UUID;
 import java.util.stream.Stream;
@@ -20,11 +20,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import eu.clarin.cmdi.cpa.model.Client;
-import eu.clarin.cmdi.cpa.model.Role;
-import eu.clarin.cmdi.cpa.repository.ClientRepository;
-import eu.clarin.cmdi.linkcheckerweb.dto.ClientDto;
-import eu.clarin.cmdi.linkcheckerweb.exception.ClientNotFoundException;
+import eu.clarin.linkchecker.persistence.model.Client;
+import eu.clarin.linkchecker.persistence.model.Role;
+import eu.clarin.linkchecker.persistence.repository.ClientRepository;
+import eu.clarin.linkchecker.web.dto.ClientDto;
+import eu.clarin.linkchecker.web.exception.ClientNotFoundException;
 import io.swagger.v3.oas.annotations.Operation;
 
 /**

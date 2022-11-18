@@ -1,7 +1,7 @@
 /**
  * 
  */
-package eu.clarin.cmdi.linkcheckerweb.dto;
+package eu.clarin.linkchecker.web.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;

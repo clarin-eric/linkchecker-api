@@ -1,4 +1,4 @@
-package eu.clarin.cmdi.linkcheckerweb;
+package eu.clarin.linkchecker.web;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
