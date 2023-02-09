@@ -46,7 +46,7 @@
 		<dependency>
 			<groupId>eu.clarin</groupId>
 			<artifactId>linkchecker-persistence</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.0.2-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -90,5 +90,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
