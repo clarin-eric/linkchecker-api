@@ -1,0 +1,28 @@
+spring:
+   datasource:
+      url: ${DATABASE_URI}
+      username: ${DATABASE_USER}
+      password: ${DATABASE_PASSWORD}
+      driver-class-name: org.mariadb.jdbc.Driver
+   jpa:
+      show-sql: true
+      hibernate:
+         ddl-auto: none
+   sql:
+      init:
+         mode: always
+   security:
+      user:
+         name: ${LINKCHECKER_WEB_USER}
+         password: ${LINKCHECKER_WEB_PASSWORD}
+   jackson:
+      serialization:
+            INDENT_OUTPUT: true
+server:
+   servlet:
+      context-path: /api
+springdoc:
+   swagger-ui.path: /
+logging:
+   level:
+      root: debug
