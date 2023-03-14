@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>eu.clarin.cmdi</groupId>
 	<artifactId>linkchecker-web</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>linkchecker-web</name>
 	<description>web-api for user interaction with link checker database</description>
 	<properties>
