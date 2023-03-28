@@ -28,6 +28,9 @@ server:
    port: 8443
    servlet:
       context-path: /api
+web:
+   cors:
+      allowed-origins: https://infra.clarin.eu  
 springdoc:
    swagger-ui.path: /
 logging:
