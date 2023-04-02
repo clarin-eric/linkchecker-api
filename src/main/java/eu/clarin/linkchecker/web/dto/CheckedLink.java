@@ -1,13 +1,13 @@
 /**
  * 
  */
-package eu.clarin.cmdi.linkcheckerweb.dto;
+package eu.clarin.linkchecker.web.dto;
 
 import java.time.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import eu.clarin.cmdi.cpa.utils.Category;
+import eu.clarin.linkchecker.persistence.utils.Category;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;

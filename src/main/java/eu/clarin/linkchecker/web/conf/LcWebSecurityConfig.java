@@ -1,7 +1,7 @@
 /**
  * 
  */
-package eu.clarin.cmdi.linkcheckerweb.conf;
+package eu.clarin.linkchecker.web.conf;
 
 import java.util.Collection;
 import java.util.List;
@@ -25,8 +25,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import eu.clarin.cmdi.cpa.model.Role;
-import eu.clarin.cmdi.cpa.repository.ClientRepository;
+import eu.clarin.linkchecker.persistence.model.Role;
+import eu.clarin.linkchecker.persistence.repository.ClientRepository;
 
 
 /**

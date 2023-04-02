@@ -1,7 +1,7 @@
 /**
  * 
  */
-package eu.clarin.cmdi.linkcheckerweb.controler.checkrequest;
+package eu.clarin.linkchecker.web.controler.checkrequest;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -22,25 +22,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import eu.clarin.cmdi.cpa.model.Client;
-import eu.clarin.cmdi.cpa.model.Context;
-import eu.clarin.cmdi.cpa.model.Status;
-import eu.clarin.cmdi.cpa.model.Url;
-import eu.clarin.cmdi.cpa.model.UrlContext;
-import eu.clarin.cmdi.cpa.repository.ClientRepository;
-import eu.clarin.cmdi.cpa.repository.ContextRepository;
-import eu.clarin.cmdi.cpa.repository.StatusRepository;
-import eu.clarin.cmdi.cpa.repository.UrlContextRepository;
-import eu.clarin.cmdi.cpa.repository.UrlRepository;
-import eu.clarin.cmdi.cpa.utils.Category;
-import eu.clarin.cmdi.cpa.utils.UrlValidator;
-import eu.clarin.cmdi.cpa.utils.UrlValidator.ValidationResult;
-import eu.clarin.cmdi.linkcheckerweb.dto.StatusReport;
-import eu.clarin.cmdi.linkcheckerweb.exception.BatchToLargeException;
+import eu.clarin.linkchecker.persistence.model.*;
+import eu.clarin.linkchecker.persistence.repository.*;
+import eu.clarin.linkchecker.persistence.utils.Category;
+import eu.clarin.linkchecker.persistence.utils.UrlValidator;
+import eu.clarin.linkchecker.persistence.utils.UrlValidator.ValidationResult;
+import eu.clarin.linkchecker.web.dto.CheckedLink;
+import eu.clarin.linkchecker.web.dto.LinkToCheck;
+import eu.clarin.linkchecker.web.dto.StatusReport;
+import eu.clarin.linkchecker.web.exception.BatchToLargeException;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
-import eu.clarin.cmdi.linkcheckerweb.dto.CheckedLink;
-import eu.clarin.cmdi.linkcheckerweb.dto.LinkToCheck;
 
 /**
  * @author WolfgangWalter Sauer (wowasa)

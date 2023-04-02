@@ -1,0 +1,40 @@
+spring:
+   datasource:
+      url: ${DATABASE_URI}
+      username: ${DATABASE_USER}
+      password: ${DATABASE_PASSWORD}
+      driver-class-name: org.mariadb.jdbc.Driver
+   jpa:
+      show-sql: true
+      hibernate:
+         ddl-auto: none
+   sql:
+      init:
+         mode: always
+   security:
+      user:
+         name: ${LINKCHECKER_WEB_USER}
+         password: ${LINKCHECKER_WEB_PASSWORD}
+   jackson:
+      serialization:
+            INDENT_OUTPUT: true
+server:
+   ssl:
+      key-store-type: jks
+      key-store: /cert/server.jks
+      key-store-password: password
+      key-alias: selfsigned
+      enabled: true
+   port: 8443
+   servlet:
+      context-path: /api
+web:
+   cors:
+      allowed-origins: https://infra.clarin.eu  
+springdoc:
+   swagger-ui.path: /
+logging:
+   level:
+      root: error
+   file: 
+      name: ${APPLICATION_HOME_DIRECTORY}/logs/linkchecker-web.log

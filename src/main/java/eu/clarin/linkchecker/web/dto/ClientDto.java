@@ -1,9 +1,9 @@
 /**
  * 
  */
-package eu.clarin.cmdi.linkcheckerweb.dto;
+package eu.clarin.linkchecker.web.dto;
 
-import eu.clarin.cmdi.cpa.model.Role;
+import eu.clarin.linkchecker.persistence.model.Role;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
