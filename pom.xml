@@ -14,7 +14,7 @@
 	<description>web-api for user interaction with link checker database</description>
 	<properties>
 		<java.version>17</java.version>
-		<linkchecker-persistence.version>0.0.2</linkchecker-persistence.version>
+		<linkchecker-persistence.version>0.0.4-SNAPSHOT</linkchecker-persistence.version>
 	</properties>
 	<dependencies>
 		<dependency>

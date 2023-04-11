@@ -151,20 +151,19 @@ public class CheckRequestCtl {
          
          Url url = uRep.findByName(urlName)
                .map(u -> {
-                  // if the URL has already a status, flag it for immediate recheck 
-                  sRep.findByUrl(u).ifPresent(status -> {
-                     
-                     status.setRecheck(true);
-                     sRep.save(status);
-                  });
                   
-                  return u;
+                  u.setPriority(10);
+                  
+                  return uRep.save(u);
                })
                .orElseGet(() -> {
             
                   ValidationResult validation = UrlValidator.validate(urlName);
                   
-                  Url newUrl = uRep.save(new Url(urlName, validation.getHost(), validation.isValid()));
+                  Url newUrl = new Url(urlName, validation.getHost(), validation.isValid());
+                  newUrl.setPriority(10);
+                        
+                  newUrl = uRep.save(newUrl);
                   
                   if(!validation.isValid() && sRep.findByUrl(newUrl).isEmpty()) { //create a status entry if Url is not valid
                      Status status = new Status(newUrl, Category.Invalid_URL, validation.getMessage(), LocalDateTime.now());
