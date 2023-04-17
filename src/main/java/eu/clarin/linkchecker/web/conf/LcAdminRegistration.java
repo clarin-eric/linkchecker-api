@@ -33,13 +33,18 @@ public class LcAdminRegistration {
    
    
    @PostConstruct
-   public void createAdmin() {
+   public void createAdmin() {     
       
-      usRep.findByName(username).orElseGet(() -> {
+      usRep.findByName(username).ifPresentOrElse(client -> {
+         
+         client.setPassword(pwEncoder.encode(password)); //change password
+         
+         usRep.save(client);         
+      }, () -> {
          Client client = new Client(username, pwEncoder.encode(password), Role.ADMIN);
          client.setEnabled(true);
          
-         return usRep.save(client);
-      });     
+         usRep.save(client);
+      });    
    }
 }
