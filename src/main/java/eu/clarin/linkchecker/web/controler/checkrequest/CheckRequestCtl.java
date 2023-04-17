@@ -6,11 +6,13 @@ package eu.clarin.linkchecker.web.controler.checkrequest;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Pair;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -24,9 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import eu.clarin.linkchecker.persistence.model.*;
 import eu.clarin.linkchecker.persistence.repository.*;
-import eu.clarin.linkchecker.persistence.utils.Category;
-import eu.clarin.linkchecker.persistence.utils.UrlValidator;
-import eu.clarin.linkchecker.persistence.utils.UrlValidator.ValidationResult;
+import eu.clarin.linkchecker.persistence.service.LinkService;
 import eu.clarin.linkchecker.web.dto.CheckedLink;
 import eu.clarin.linkchecker.web.dto.LinkToCheck;
 import eu.clarin.linkchecker.web.dto.StatusReport;
@@ -44,15 +44,11 @@ import lombok.extern.slf4j.Slf4j;
 public class CheckRequestCtl {
    
    @Autowired
-   private UrlRepository uRep;
-   @Autowired
-   private UrlContextRepository ucRep;
-   @Autowired
-   private ContextRepository cRep;
-   @Autowired
    private StatusRepository sRep;
    @Autowired
    private ClientRepository usRep;
+   @Autowired
+   LinkService lService;
    
    @Transactional
    @GetMapping(value = "/checkrequest", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -143,47 +139,11 @@ public class CheckRequestCtl {
       }
       
       final LocalDateTime now = LocalDateTime.now();
-      final String origin = "upload_" + now.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS"));      
+      final String origin = "upload_" + now.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS"));     
       
-      ltcs.forEach(ltc -> {
-         
-         final String urlName = ltc.getUrl().trim();
-         
-         Url url = uRep.findByName(urlName)
-               .map(u -> {
-                  
-                  u.setPriority(10);
-                  
-                  return uRep.save(u);
-               })
-               .orElseGet(() -> {
-            
-                  ValidationResult validation = UrlValidator.validate(urlName);
-                  
-                  Url newUrl = new Url(urlName, validation.getHost(), validation.isValid());
-                  newUrl.setPriority(10);
-                        
-                  newUrl = uRep.save(newUrl);
-                  
-                  if(!validation.isValid() && sRep.findByUrl(newUrl).isEmpty()) { //create a status entry if Url is not valid
-                     Status status = new Status(newUrl, Category.Invalid_URL, validation.getMessage(), LocalDateTime.now());
-                     
-                     sRep.save(status);
-                  }
-                  return newUrl;
-               });
-         
-         Context context = cRep.findByOriginAndProvidergroupAndClient(origin, null, client)
-               .orElseGet(() -> cRep.save(new Context(origin, null, client)));                
-            
-         
-         UrlContext urlContext = new UrlContext(url, context, now, true);
-         urlContext.setExpectedMimeType(ltc.getExpectedMimeType());
-         
-         ucRep.save(urlContext);   
-         
-
-      });  
+      Collection<Pair<String,String>> urlMimes = ltcs.stream().map(ltc -> Pair.of(ltc.getUrl(), ltc.getExpectedMimeType())).collect(Collectors.toList());
+      
+      lService.savePerOrigin(client, null, origin, urlMimes, 10);
       
       return origin;
    }
