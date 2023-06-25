@@ -9,12 +9,12 @@
 	</parent>
 	<groupId>eu.clarin.cmdi</groupId>
 	<artifactId>linkchecker-web</artifactId>
-	<version>0.0.4-SNAPSHOT</version>
+	<version>0.0.4</version>
 	<name>linkchecker-web</name>
 	<description>web-api for user interaction with link checker database</description>
 	<properties>
 		<java.version>17</java.version>
-		<linkchecker-persistence.version>0.0.5</linkchecker-persistence.version>
+		<linkchecker-persistence.version>0.0.6</linkchecker-persistence.version>
 	</properties>
 	<dependencies>
 		<dependency>
