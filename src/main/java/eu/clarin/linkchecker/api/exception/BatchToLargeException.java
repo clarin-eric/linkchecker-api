@@ -1,7 +1,7 @@
 /**
  * 
  */
-package eu.clarin.linkchecker.web.exception;
+package eu.clarin.linkchecker.api.exception;
 
 /**
  * @author WolfgangWalter Sauer (wowasa)

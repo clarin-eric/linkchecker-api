@@ -5,4 +5,4 @@
  * @author WolfgangWalter Sauer (wowasa)
  *
  */
-package eu.clarin.linkchecker.web.conf;
+package eu.clarin.linkchecker.api.dto;

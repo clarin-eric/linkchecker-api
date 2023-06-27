@@ -1,7 +1,7 @@
 /**
  * 
  */
-package eu.clarin.linkchecker.web.dto;
+package eu.clarin.linkchecker.api.dto;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package eu.clarin.linkchecker.web.conf;
+package eu.clarin.linkchecker.api.conf;
 
 import java.util.Collection;
 import java.util.List;

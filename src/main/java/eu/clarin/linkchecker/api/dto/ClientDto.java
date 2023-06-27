@@ -1,7 +1,7 @@
 /**
  * 
  */
-package eu.clarin.linkchecker.web.dto;
+package eu.clarin.linkchecker.api.dto;
 
 import eu.clarin.linkchecker.persistence.model.Role;
 import io.swagger.v3.oas.annotations.media.Schema;

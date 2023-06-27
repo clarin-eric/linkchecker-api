@@ -1,7 +1,7 @@
 /**
  * 
  */
-package eu.clarin.linkchecker.web.controler.checkrequest;
+package eu.clarin.linkchecker.api.controler.checkrequest;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -24,13 +24,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import eu.clarin.linkchecker.api.dto.CheckedLink;
+import eu.clarin.linkchecker.api.dto.LinkToCheck;
+import eu.clarin.linkchecker.api.dto.StatusReport;
+import eu.clarin.linkchecker.api.exception.BatchToLargeException;
 import eu.clarin.linkchecker.persistence.model.*;
 import eu.clarin.linkchecker.persistence.repository.*;
 import eu.clarin.linkchecker.persistence.service.LinkService;
-import eu.clarin.linkchecker.web.dto.CheckedLink;
-import eu.clarin.linkchecker.web.dto.LinkToCheck;
-import eu.clarin.linkchecker.web.dto.StatusReport;
-import eu.clarin.linkchecker.web.exception.BatchToLargeException;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 
