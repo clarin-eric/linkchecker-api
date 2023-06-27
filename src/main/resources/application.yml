@@ -38,3 +38,6 @@ logging:
       root: error
    file: 
       name: ${APPLICATION_HOME_DIRECTORY}/logs/linkchecker-web.log
+linkchecker-api:
+   directory:
+      backups:/backups      
