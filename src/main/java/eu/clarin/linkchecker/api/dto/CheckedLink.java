@@ -42,4 +42,6 @@ public class CheckedLink {
    private Category category;
    @Schema(description = "message returned from server or generated message", nullable = false, type = "string", example = "Restricted access, Status code: 401")
    private String message;
+   @Schema(description = "number of redirects", nullable = true, type = "integer", example = "3")
+   private Integer redirects;
 }

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package eu.clarin.linkchecker.api.controler.checkrequest;
+package eu.clarin.linkchecker.api.controler.user;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -70,7 +70,6 @@ public class CheckRequestCtl {
    public ResponseEntity<StatusReport> getResults(Authentication auth, @PathVariable String batchId) {
       
       final StatusReport report = new StatusReport();
-      report.setCreationDate(LocalDateTime.now());
       
       try(Stream<Status> stream = (batchId==null?sRep.findAllByUrlUrlContextsContextClientName(auth.getName())
             :sRep.findAllByUrlUrlContextsContextClientNameAndUrlUrlContextsContextOrigin(auth.getName(), batchId))){
@@ -85,7 +84,8 @@ public class CheckRequestCtl {
                      status.getDuration(), 
                      status.getCheckingDate(),
                      status.getCategory(),
-                     status.getMessage()
+                     status.getMessage(),
+                     status.getRedirectCount()
                )
             ));
       }
@@ -93,7 +93,7 @@ public class CheckRequestCtl {
          log.error("exception in status download", ex);
          log.error("clientname: {}, batchId: {}", auth.getName(), batchId);
          
-         return new ResponseEntity<StatusReport>(report, HttpStatus.INTERNAL_SERVER_ERROR);
+         return ResponseEntity.internalServerError().body(report);
       }
       
       return ResponseEntity.ok(report);
@@ -115,7 +115,7 @@ public class CheckRequestCtl {
          return new ResponseEntity<String>(ex.getMessage(), HttpStatus.PAYLOAD_TOO_LARGE);
       }
       catch(Exception ex) {
-         return new ResponseEntity<String>("batch upload failed - please contact clarin", HttpStatus.INTERNAL_SERVER_ERROR);
+         return ResponseEntity.internalServerError().body("batch upload failed - please contact clarin");
       }
 
       return ResponseEntity.ok(message);
