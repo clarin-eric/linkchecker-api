@@ -20,7 +20,7 @@ import lombok.Data;
 public class StatusReport {
    
    @Schema(description = "creation date/time of the report", nullable = false, type = "string", format = "date-time", example = "2022-10-02T19:00:20")
-   private LocalDateTime creationDate;
+   private LocalDateTime creationDate = LocalDateTime.now();
    
    @Schema(description = "a list of link checking results", nullable = false, type = "array")
    @JsonProperty("checked-links")
