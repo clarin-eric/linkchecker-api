@@ -26,6 +26,8 @@ springdoc:
 logging:
    level:
       root: debug
+      org.hibernate.SQL: DEBUG
+      org.hibernate.type.descriptor.sql.BasicBinder: TRACE      
 linkchecker-api:
    directory:
       backups: /data/testbackups         
