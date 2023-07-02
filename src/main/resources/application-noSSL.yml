@@ -28,4 +28,4 @@ logging:
       root: debug
 linkchecker-api:
    directory:
-      backups:/data/testbackups         
+      backups: /data/testbackups         

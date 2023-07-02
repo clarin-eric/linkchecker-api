@@ -30,7 +30,7 @@ import lombok.extern.slf4j.Slf4j;
  *
  */
 @RestController
-@RequestMapping("/amin/backup")
+@RequestMapping("/admin/backup")
 @Slf4j
 public class BackupCtl {
    
@@ -43,7 +43,7 @@ public class BackupCtl {
       
 
       try {
-         Optional<Path> latestBackup = Files.list(Path.of(backupsDirStr)).filter(file -> file.endsWith("tar.gz")).max(Comparator.comparingLong(f -> f.toFile().lastModified()));
+         Optional<File> latestBackup = Files.list(Path.of(backupsDirStr)).map(Path::toFile).filter(file -> file.toString().endsWith("tar.gz")).max(Comparator.comparingLong(File::lastModified));
          
          if(latestBackup.isPresent()) {
             

@@ -40,4 +40,4 @@ logging:
       name: ${APPLICATION_HOME_DIRECTORY}/logs/linkchecker-web.log
 linkchecker-api:
    directory:
-      backups:/backups      
+      backups: /backups      
