@@ -43,7 +43,7 @@ public class BackupCtl {
       
 
       try {
-         Optional<File> latestBackup = Files.list(Path.of(backupsDirStr)).map(Path::toFile).filter(file -> file.toString().endsWith("tar.gz")).max(Comparator.comparingLong(File::lastModified));
+         Optional<File> latestBackup = Files.list(Path.of(backupsDirStr)).map(Path::toFile).filter(file -> file.toString().endsWith(".sql.gz")).max(Comparator.comparingLong(File::lastModified));
          
          if(latestBackup.isPresent()) {
             
