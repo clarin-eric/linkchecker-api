@@ -37,7 +37,7 @@ logging:
    level:
       root: error
    file: 
-      name: ${APPLICATION_HOME_DIRECTORY}/logs/linkchecker-web.log
+      name: ${APPLICATION_HOME_DIRECTORY}/logs/linkchecker-api.log
 linkchecker-api:
    directory:
       backups: /backups      
