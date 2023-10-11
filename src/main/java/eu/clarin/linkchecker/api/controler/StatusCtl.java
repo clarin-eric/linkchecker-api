@@ -7,10 +7,9 @@ package eu.clarin.linkchecker.api.controler;
 import java.util.Collection;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

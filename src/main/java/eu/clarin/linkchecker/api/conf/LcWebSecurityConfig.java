@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.Authentication;
@@ -43,12 +44,13 @@ public class LcWebSecurityConfig {
    @Bean
    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
       //enable HTTP Basic authentication
-      http.httpBasic();
-
-      http.csrf().disable()
-         .authorizeRequests()
-         .antMatchers("/admin/**").hasAuthority(Role.ADMIN.name())
-         .antMatchers("/checkrequest/**").hasAnyAuthority(Role.ADMIN.name(), Role.USER.name());
+      http
+         .httpBasic(Customizer.withDefaults())
+         .csrf(csfr -> csfr.disable())
+         .authorizeHttpRequests(autorize -> autorize
+               .requestMatchers("/admin/**").hasAuthority(Role.ADMIN.name())
+               .requestMatchers("/checkrequest/**").hasAnyAuthority(Role.ADMIN.name(), Role.USER.name())
+         );
 
       return http.build();
    }
