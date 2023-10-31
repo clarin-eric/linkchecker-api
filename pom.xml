@@ -48,6 +48,12 @@
 			<groupId>eu.clarin</groupId>
 			<artifactId>linkchecker-persistence</artifactId>
 			<version>${linkchecker-persistence.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.google.guava</groupId>
+					<artifactId>guava</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
