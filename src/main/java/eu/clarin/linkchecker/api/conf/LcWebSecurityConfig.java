@@ -50,6 +50,7 @@ public class LcWebSecurityConfig {
          .authorizeHttpRequests(autorize -> autorize
                .requestMatchers("/admin/**").hasAuthority(Role.ADMIN.name())
                .requestMatchers("/checkrequest/**").hasAnyAuthority(Role.ADMIN.name(), Role.USER.name())
+               .anyRequest().permitAll()
          );
 
       return http.build();
