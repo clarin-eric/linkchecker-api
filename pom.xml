@@ -13,7 +13,8 @@
 	<name>linkchecker-web</name>
 	<description>web-api for user interaction with link checker database</description>
 	<properties>
-		<java.version>17</java.version>
+		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
 		<linkchecker-persistence.version>1.0.3</linkchecker-persistence.version>
 	</properties>
 	<dependencies>
