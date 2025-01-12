@@ -1,3 +1,5 @@
+# version 2.0.2
+
 # version 2.0.1
 - fix for issue https://github.com/clarin-eric/linkchecker-api/issues/12
 

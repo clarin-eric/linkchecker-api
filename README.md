@@ -5,8 +5,8 @@ Linkchecker-web is a REST API based on SPRING BOOT, which serves as an web inter
 determined by the [curation-persistence](https://github.com/clarin-eric/curation-persistence) project, which is included as a maven dependency. 
 
 ## Requirements
-- JDK17 or higher to maven-build the application
-- JRE17 or higher to run the application
+- JDK21 or higher to maven-build the application
+- JRE21 or higher to run the application
 - a mariadb database-server and an empty database with the right for the application user to create the table structure in this database
 
 ## Setup
@@ -27,7 +27,7 @@ A sample file in yaml format is in the /config directory of this project.
 We recommend not to include the configuration file in the jar-build, but to place it either in a /config directory or to specify the file location with the property *spring.config.location* (see next section).
 
 ## Running the application
-The build jar file is a so called 'fat client', which includes tomcat as an application server. Hence all you have to do is to run the application with
+The build jar file is a so called 'fat client', which includes tomcat as an application server. Hence, all you have to do is to run the application with
 
 ```
 java -jar linkchecker-web<version>.jar [--spring.config.location=<path to configuration file>]
