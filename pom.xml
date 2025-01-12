@@ -9,13 +9,13 @@
 	</parent>
 	<groupId>eu.clarin.cmdi</groupId>
 	<artifactId>linkchecker-api</artifactId>
-	<version>2.0.1-SNAPSHOT</version>
+	<version>2.0.1</version>
 	<name>linkchecker-web</name>
 	<description>web-api for user interaction with link checker database</description>
 	<properties>
 		<maven.compiler.source>21</maven.compiler.source>
 		<maven.compiler.target>21</maven.compiler.target>
-		<linkchecker-persistence.version>1.0.3</linkchecker-persistence.version>
+		<linkchecker-persistence.version>2.0.0</linkchecker-persistence.version>
 		<springdoc.version>2.6.0</springdoc.version>
 	</properties>
 	<dependencies>
