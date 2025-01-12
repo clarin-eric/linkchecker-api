@@ -1,4 +1,5 @@
 # version 2.0.2
+- upgrade to Spring Boot 3.4.1
 
 # version 2.0.1
 - fix for issue https://github.com/clarin-eric/linkchecker-api/issues/12
