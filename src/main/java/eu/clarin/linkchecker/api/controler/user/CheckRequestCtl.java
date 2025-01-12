@@ -111,7 +111,7 @@ public class CheckRequestCtl {
          message = saveLTCs(auth.getName(), ltcs);
       }
       catch(BatchToLargeException ex) {         
-         return new ResponseEntity<String>(ex.getMessage(), HttpStatus.PAYLOAD_TOO_LARGE);
+         return new ResponseEntity<>(ex.getMessage(), HttpStatus.PAYLOAD_TOO_LARGE);
       }
       catch(Exception ex) {
          return ResponseEntity.internalServerError().body("batch upload failed - please contact clarin");
@@ -121,12 +121,12 @@ public class CheckRequestCtl {
    }
    
    @Transactional
-   private String saveLTCs(String username,  Collection<LinkToCheck> ltcs) throws BatchToLargeException{
+   protected String saveLTCs(String username, Collection<LinkToCheck> ltcs) throws BatchToLargeException{
       
       Client client = usRep.findByName(username).get();
       
       //check if the array size exceeds the quota
-      if(client.getQuota() != null) {
+      if(client.getQuota() != null && client.getQuota() >= 0) {
          if(ltcs.size() < client.getQuota()) {
 
             client.setQuota(client.getQuota() - ltcs.size());
