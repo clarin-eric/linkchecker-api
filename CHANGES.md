@@ -1,5 +1,9 @@
+# version 2.1.0
+- upgrading to parent Spring Boot 4.0.2
+- upgrading to springdoc 2.8.15
+
 # version 2.0.2
-- upgrade to Spring Boot 3.4.4
+- upgrading to Spring Boot 3.4.4
 
 # version 2.0.1
 - fix for issue https://github.com/clarin-eric/linkchecker-api/issues/12
