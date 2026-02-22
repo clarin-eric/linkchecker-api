@@ -1,6 +1,6 @@
 # version 2.1.0
 - upgrading to parent Spring Boot 4.0.2
-- upgrading to springdoc 2.8.15
+- upgrading to springdoc 3.0.1
 
 # version 2.0.2
 - upgrading to Spring Boot 3.4.4
