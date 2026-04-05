@@ -15,7 +15,7 @@
 	<properties>
 		<maven.compiler.source>21</maven.compiler.source>
 		<maven.compiler.target>21</maven.compiler.target>
-		<linkchecker-persistence.version>2.2.0-SNAPSHOT</linkchecker-persistence.version>
+		<linkchecker-persistence.version>2.2.0</linkchecker-persistence.version>
 		<springdoc.version>3.0.1</springdoc.version>
 	</properties>
 	<dependencies>
