@@ -1,3 +1,7 @@
+# version 3.0.0
+- based on Java 25
+- upgrading to Spring Boot 4.1.1
+
 # version 2.1.0
 - upgrading to parent Spring Boot 4.0.2
 - upgrading to springdoc 3.0.1
